@@ -4,30 +4,32 @@ Tarea: Tras mostrar opciones para la detección y extracción de información de
 
 # Introducción
 
-A priori la idea de esta práctica era la realización de un filtro de pirata (sombrero y parche) que se activase al guiñar un ojo, el detector de parpadeos daba muchos falsos positivos al enfocarme en un solo ojo por lo que finalmente en lugar de complicarme hice que se activase y desactivase simplemente al parpadear. Aproveche esto y tambien añadí un contador de parpadeos.
+A priori, la idea de esta práctica era realizar un filtro de pirata (sombrero y parche) que se activase al guiñar un ojo. Sin embargo, el detector de parpadeos daba muchos falsos positivos al enfocarse en un solo ojo, por lo que, para simplificar, decidí que se activase y desactivase simplemente al parpadear. Aproveché esta funcionalidad y también añadí un contador de parpadeos.
 
-Para el desarrollo de esta práctica hice uso de mediapipe pues contaba con la experiencia previa de la práctica 2. 
-La elaboración de este filtro se puede dividir en tres fases principales. En primer lugar la extraccion de los objetos a añadir al video, en segundo lugar la detección del parpadeo y en tercer y último lugar la insersición de los objetos en el frame.
+Para el desarrollo de esta práctica, hice uso de Mediapipe, ya que contaba con la experiencia previa de la práctica 2.
+La elaboración de este filtro se puede dividir en tres fases principales: en primer lugar, la extracción de los objetos a añadir al video; en segundo lugar, la detección del parpadeo; y, en tercer y último lugar, la inserción de los objetos en el fotograma.
 
 # Extracción de Objetos 
 
-Para la extracción de los objetos, en este caso el parche y el sombrero probablemente me compliqué mas de las cuenta. Lo que hice fue umbralizar el frame previamente convertido a escala de grises, aproximación por contornos para entraer la forma del objeto y a continuación hacer uso de una máscara con dicha forma comparandola a la imagen orginal para extraer el objeto en cuestión.
+Para la extracción de los objetos, en este caso el parche y el sombrero, probablemente me compliqué más de la cuenta. Lo que hice fue umbralizar el fotograma previamente convertido a escala de grises, realizar una aproximación por contornos para extraer la forma del objeto y, a continuación, usar una máscara con dicha forma comparándola con la imagen original para extraer el objeto en cuestión.
 
 
 ![image](https://github.com/user-attachments/assets/c25d1b75-86e8-4270-bcc0-89580368cfa6)
 
 # Detección del parpadeo
 
-En cuanto a la detección del parpadeo hago uso del modelo face mesh de mediapipe que segmenta la cara y le asigna un valor numero a diferentes puntos de la cara, cada ojo concretamente se segmenta en los siguientes vetices.
+En cuanto a la detección del parpadeo, hago uso del modelo Face Mesh de Mediapipe, que segmenta la cara y asigna un valor numérico a diferentes puntos de la misma. Cada ojo, concretamente, se segmenta en los siguientes vértices.
 
 ![image](https://github.com/user-attachments/assets/4e9f0043-ba9a-42c4-9f3b-7b77e47048d4)
 
-Una vez extraida la posición de cada ojo, el código calcula la distancia entre los vertices superiores e inferiores y obtiene la media entre los dos ojos, cuando la distancia es demasiado pequeña concretamente un umbral de 0.26 significa que la cara detectada esta parpadeando
+Una vez extraída la posición de cada ojo, el código calcula la distancia entre los vértices superiores e inferiores y obtiene la media entre ambos ojos. Cuando esta distancia es demasiado pequeña, concretamente un umbral de 0.26, significa que la cara detectada está parpadeando.
 
 # Inserción de los objetos en la imagen 
 
-Para la inserción de los objetos en la imagen, por un lado para el sombrero utilizo face detection y lo situo sobre la parte superior de la cabeza mientras que, para el ojo, con face mesh coloco el parche en el vertice 263 correspondiente al centro del ojo derecho, para el "resize" de los objetos tomo como referencia la cara, en ambos casos dispongo de un factor para ajusta el tamaño a voluntad en relación a esta. 
-Finalmente para insertarlos en el frame similar a la extracción de los objetos inicial. hago uso de mascaras y lógica entre estas y el frame.
+Para la inserción de los objetos en la imagen, por un lado, utilizo Face Detection para situar el sombrero sobre la parte superior de la cabeza. Por otro lado, para el ojo, utilizo Face Mesh y coloco el parche en el vértice 263, que corresponde al centro del ojo derecho. Para el "resize" de los objetos, tomo como referencia la cara. En ambos casos, dispongo de un factor para ajustar el tamaño a voluntad en relación con esta.
+
+Finalmente, para insertarlos en el fotograma, de manera similar a la extracción de los objetos iniciales, hago uso de máscaras y lógica entre estas y el fotograma.
+
 
 # Video demostración
 
