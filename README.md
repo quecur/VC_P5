@@ -4,7 +4,7 @@ Tarea: Tras mostrar opciones para la detección y extracción de información de
 
 # Introducción
 
-A priori la idea de esta práctica era la realización de un filtro de pirata (sombrero y parche) que se activase al guiñar un ojo, el detector de parpadeos dectaba muchos falsos positivos al enfocarme en un solo ojo por lo que finalmente en lugar de complicarme hice que se activase y desactivase simplemente al parpadear. Aproveche esto y tambien añadí un contador de parpadeos.
+A priori la idea de esta práctica era la realización de un filtro de pirata (sombrero y parche) que se activase al guiñar un ojo, el detector de parpadeos daba muchos falsos positivos al enfocarme en un solo ojo por lo que finalmente en lugar de complicarme hice que se activase y desactivase simplemente al parpadear. Aproveche esto y tambien añadí un contador de parpadeos.
 
 Para el desarrollo de esta práctica hice uso de mediapipe pues contaba con la experiencia previa de la práctica 2. 
 La elaboración de este filtro se puede dividir en tres fases principales. En primer lugar la extraccion de los objetos a añadir al video, en segundo lugar la detección del parpadeo y en tercer y último lugar la insersición de los objetos en el frame.
